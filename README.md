@@ -1,39 +1,70 @@
-Hackyy Pad
+# Hackyy Pad
 
-A custom 4-key macropad with a rotary encoder and OLED display, designed and built from scratch for the Hack Club Stardance challenge.
-What it is
+A custom 4-key macropad featuring a rotary encoder and an animated OLED display, designed and built from scratch for the Hack Club Stardance challenge.
 
-I built this macropad as a dedicated physical controller for deep-work sessions and creative workflow. Instead of memorizing awkward multi-key shortcuts or reaching for a mouse, my most frequent actions are mapped directly to physical switches, a clickable knob, and an active OLED screen.
-Layout & Controls
+---
 
-    Rotary Encoder (Knob):
-        Turn: Master volume control
-        Click: Play / Pause media
-    Switch 1: Instant audio mute (lifesaver when jumping into unexpected calls)
-    Switch 2: Skip to next track
-    Switch 3: Switch virtual desktops instantly (my dedicated "hide distractions / focus" button)
-    Switch 4: Custom macro that instantly types out the Gumroad link for my new project
-    0.91" OLED Screen: Renders an animated Bongo Cat that furiously taps its paws whenever I turn the knob or hit any of the switches.
+## Screenshots
 
-Hardware & 3D Enclosure Design
-PCB & Schematic (KiCad)
+![Overall Hackpad](assets/case-1.png)
+![Case Angle 2](assets/case-2.png)
+![Case Angle 3](assets/case-3.png)
 
-I designed the custom PCB from the ground up in KiCad, centered around the Seeed Studio XIAO RP2040. Because this is a compact 4-key build, I didn't need to overcomplicate things with a standard diode matrix. Instead, I learned how to wire each switch directly between a microcontroller GPIO pin and ground—keeping the circuit clean and straightforward.
-Case Modeling (Onshape)
+| Schematic | PCB Layout | 3D Case Design |
+| :---: | :---: | :---: |
+| ![Schematic](assets/schematic.png) | ![PCB Layout](assets/pcb.png) | ![3D Case Design](assets/case-1.png) |
 
-Designing physical enclosures was completely new territory for me. I modeled a custom two-part 3D-printable shell in Onshape (Hackyy - Part 1 and Part 2). The hardest part was dialing in the exact tolerances so the OLED display, mechanical switch plate, and rotary encoder seated flush without rattling or pinching wires.
-Firmware & Pairing with AI
+---
 
-Rather than just copying and pasting blocks of code, I treated AI like a patient tutor and senior pair-programmer across the entire build:
+## Bill of Materials (BOM)
 
-    Hardware & CAD: It helped break down 3D modeling concepts in Onshape and guided me through the logic of translating my physical KiCad schematic pinouts into the right QMK GPIO matrix in keyboard.json.
-    C Syntax & Debugging: It helped me decode massive walls of cryptic red GCC compiler errors. I learned the hard way how unforgiving strict C can be—like when a single rogue lowercase l inside an enum completely crashed an entire build.
-    OLED Animation: It helped me write the frame-swapping logic required to render the Bongo Cat bitmaps without blocking the main key-scanning loop.
+- **1x** Custom PCB (designed in KiCad)
+- **1x** 3D Printed Enclosure (Top and Bottom halves)
+- **1x** Seeed Studio XIAO RP2040 Microcontroller
+- **4x** Mechanical Switches
+- **4x** Keycaps
+- **1x** Rotary Encoder + Knob
+- **1x** 0.91" I2C OLED Display
 
-The 1.5-Hour Tragedy 😭
+---
 
-The most painful part of this entire challenge wasn't the C compiler, the KiCad routing, or 3D modeling tolerances—it was the time tracker.
+## Layout & Workflow Shortcuts
 
-I spent over an hour and a half deep in the zone writing and flashing code, only to discover my Hackatime session had been logging to the completely wrong project on my Stardance dashboard. Over 1.5 hours of tracked work vanished into the void.
+I designed this pad as a dedicated desk companion to streamline deep-work sessions, audio control, and quick multitasking:
 
-Lesson learned: Always double-check your project dropdown before starting a sprint!
+* **Rotary Encoder (Knob):** 
+  * **Turn:** Smooth master volume adjustment
+  * **Click:** Toggle Play / Pause media
+* **Switch 1:** Quick system audio mute (lifesaver for surprise calls)
+* **Switch 2:** Skip to next track
+* **Switch 3:** Instant virtual desktop toggle (my dedicated "hide distractions / focus" button)
+* **Switch 4:** Custom macro that automatically types out my Gumroad project link
+* **OLED Display:** Runs a custom **Bongo Cat** animation that rapidly taps its paws along in real-time whenever I press a key or twist the knob!
+
+---
+
+## The Build Journey & What I Learned
+
+### Hardware & Enclosure
+- **KiCad PCB Design:** Routed the board around the Seeed Studio XIAO RP2040. Since it's a compact 4-key layout, I was able to skip the complexity of a traditional diode matrix and wired each switch directly from a GPIO pin to ground.
+- **3D Modeling in Onshape:** Designed a custom two-part enclosure from scratch. The hardest part was dialing in the exact fit tolerances so the OLED glass, mechanical switch plate, and rotary encoder sat flush without flexing or rattling.
+
+### Firmware & QMK
+- **Directory Structure:** QMK was tough to configure at first. I learned the hard way that files can't just live anywhere—they have to follow strict nesting rules (`keyboards/hackyy_pad/keymaps/default`) for the build pipeline to compile.
+- **Pin Mapping:** Translated physical schematic connections into digital pinouts inside `keyboard.json` to make sure the RP2040's GPIO lines synced up with the switch matrix.
+
+### Pairing with AI as a Tutor
+Rather than just copying and pasting blocks of code, I used AI as an interactive pair-programmer to:
+- Learn core CAD constraints and modeling concepts in Onshape.
+- Decode walls of cryptic red GCC compiler errors (like hunting down a rogue lowercase letter in an `enum` definition that brought down the whole build).
+- Build the frame-swapping logic required to render the Bongo Cat bitmap without lagging key-input responsiveness.
+
+---
+
+## The 1.5-Hour Tragedy 😭
+
+The most painful bug of this entire project had nothing to do with C code, trace routing, or 3D tolerances—it was time tracking.
+
+I spent over an hour and a half deep in the zone writing firmware and debugging, only to discover that my **Hackatime** session had been logging to the completely wrong project on the Stardance dashboard. Over 1.5 hours of tracked work vanished into the void. But a end got the time back.
+
+**Lesson learned:** Always double-check your active project before locking into a build sprint!
