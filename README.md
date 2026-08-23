@@ -12,7 +12,7 @@ A custom 4-key macropad featuring a rotary encoder and an animated OLED display,
 
 | Schematic | PCB Layout | 3D Case Design |
 | :---: | :---: | :---: |
-| ![Schematic](assets/schematic.png) | ![PCB Layout](assets/pcb.png) | ![3D Case Design](assets/case-1.png) |
+| ![Schematic](assets/schematic.png) | ![PCB Layout](assets/PCB.png) | ![3D Case Design](assets/case-1.png) |
 
 ---
 
